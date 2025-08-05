@@ -1,0 +1,63 @@
+export const projectsData = [
+    {
+      id: 1,
+      name: "AI-Powered Financial App",
+      icon: "💰",
+      description: [
+        "Built voice-driven financial assistant using OpenAI and AWS Transcribe.",
+        "Implemented OTP authentication via AWS SES, Google & Facebook.",
+        "Generated PDFs from Google Sheets and emailed via AWS SES.",
+        "Developed REST API using Express, TypeScript, MongoDB, and Joi."
+      ],
+      tools: ["Express", "TypeScript", "MongoDB", "OpenAI API", "AWS SES"],
+      role: "Backend Developer",
+      code: "#",
+      demo: "#",
+    },
+    {
+      id: 2,
+      name: "Travel Agency Web App",
+      icon: "✈️",
+      description: [
+        "Created responsive UI with Next.js, Tailwind CSS, and MUI.",
+        "Integrated multi-language and currency features.",
+        "Developed backend using NestJS, MySQL, and AWS services.",
+        "Deployed frontend to Amplify and backend to EC2."
+      ],
+      tools: ["Next.js", "TypeScript", "NestJS", "MySQL", "AWS S3"],
+      role: "Full Stack Developer",
+      code: "#",
+      demo: "#",
+    },
+    {
+      id: 3,
+      name: "AI Real Estate Platform",
+      icon: "🏠",
+      description: [
+        "Developed platform using Express, MongoDB, and TypeScript.",
+        "Integrated OpenAI and Replicate for AI features.",
+        "Implemented Stripe-based subscription model.",
+        "Used JWT, Cron Jobs, and role-based access."
+      ],
+      tools: ["Next.js", "TypeScript", "OpenAI API", "Replicate API", "Stripe"],
+      role: "Full Stack Developer",
+      code: "#",
+      demo: "#",
+    },
+    {
+      id: 4,
+      name: "Newsroom Dashboard",
+      icon: "📰",
+      description: [
+        "Developed admin dashboard using Next.js and MUI.",
+        "Managed global state using Redux.",
+        "Handled forms using React Hook Form.",
+        "Integrated calendar and Sun Editor."
+      ],
+      tools: ["Next.js", "Material UI", "Redux", "Hook Form", "Sun Editor"],
+      role: "Frontend Developer",
+      code: "#",
+      demo: "#",
+    }
+  ];
+  
