@@ -2,35 +2,49 @@ import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import mail from "./SendEmail.js";
-
 import dotenv from "dotenv";
+import sendMail from "./SendEmail.js";
+
 dotenv.config();
 
 const app = express();
+
+// Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-app.get("/", async (req, res, next) => {
-	var pemail = "vishnureddy8980@gmail.com";
-    var text = "Send This as Body";
-    var subject = "User credentials:";
-    mail(pemail, text, subject);
-	console.log("node email route");
-	return res.send({name: "vishnu", age: "24"});
-//   return res.redirect("https://vue-frontend-jcz9.onrender.com");
+// Health check route
+app.get("/", (req, res) => {
+  res.status(200).send({ message: "Server is running 🚀" });
 });
 
-app.get("*", (req, res) => {
-  res.status(200).send("url not found");
+// Email route
+app.post("/send-email", async (req, res) => {
+  try {
+    const { to, subject, text } = req.body;
+
+    if (!to || !subject || !text) {
+      return res.status(400).json({ error: "to, subject, and text are required" });
+    }
+
+    await sendMail(to, text, subject);
+
+    return res.status(200).json({ message: "Email sent successfully ✅" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return res.status(500).json({ error: "Failed to send email" });
+  }
 });
 
+// Catch-all route
+app.use("*", (req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
 
-
-
-  const PORT = 8500;
-  app.listen(PORT, () => {
-	console.log(`Server running on http://localhost:${PORT}/`);
-  });
+// Start server
+const PORT = process.env.PORT || 8500;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}/`);
+});

@@ -1,24 +1,26 @@
 import nodemailer from "nodemailer";
 
-export default function send_mail(receiverEmail, text, subject) {
+export default function sendMail(receiverEmail, text, subject) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "gujjulavishnuvardhanreddy8179@gmail.com",
-      pass: "akzw gbio ymdv mgvy",
+      user: process.env.EMAIL_USER,  // Your Gmail address from .env
+      pass: process.env.EMAIL_PASS,  // App password from .env
     },
   });
+
   const mailOptions = {
-    from: "gujjulavishnuvardhanreddy8179@gmail.com",
+    from: process.env.EMAIL_USER,
     to: receiverEmail,
-    subject: subject,
-    text: text,
+    subject,
+    text,
   };
-  transporter.sendMail(mailOptions, function (error, info) {
+
+  transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error);
+      console.error("Error sending email:", error);
     } else {
-      console.log("email sent successfully");
+      console.log("Email sent successfully:", info.response);
     }
   });
 }
