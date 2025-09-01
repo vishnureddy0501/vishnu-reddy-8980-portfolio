@@ -1,2 +1,32 @@
+# Node
+node_modules
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-/node_modules
+# Build output
+.next
+out
+dist
+build
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.test
+
+# Keep .env.dev tracked
+!.env.dev
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/*
+!.vscode/settings.json

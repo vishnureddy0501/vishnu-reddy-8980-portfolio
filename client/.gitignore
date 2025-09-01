@@ -1,3 +1,33 @@
+# Node modules
+node_modules
 
-/node_modules
+# Next.js build output
 .next
+out
+
+# Production build
+build
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.test
+
+# Keep .env.dev tracked
+!.env.dev
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/*
+!.vscode/settings.json

@@ -17,34 +17,36 @@ app.use(cookieParser());
 
 // Health check route
 app.get("/", (req, res) => {
-  res.status(200).send({ message: "Server is running 🚀" });
+    res.status(200).send({ message: "Server is running 🚀" });
 });
 
 // Email route
 app.post("/send-email", async (req, res) => {
-  try {
-    const { to, subject, text } = req.body;
+    try {
+        const { to, subject, text } = req.body;
 
-    if (!to || !subject || !text) {
-      return res.status(400).json({ error: "to, subject, and text are required" });
+        if (!to || !subject || !text) {
+            return res
+                .status(400)
+                .json({ error: "to, subject, and text are required" });
+        }
+
+        await sendMail(to, text, subject);
+
+        return res.status(200).json({ message: "Email sent successfully ✅" });
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return res.status(500).json({ error: "Failed to send email" });
     }
-
-    await sendMail(to, text, subject);
-
-    return res.status(200).json({ message: "Email sent successfully ✅" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return res.status(500).json({ error: "Failed to send email" });
-  }
 });
 
 // Catch-all route
 app.use("*", (req, res) => {
-  res.status(404).json({ error: "Route not found" });
+    res.status(404).json({ error: "Route not found" });
 });
 
 // Start server
 const PORT = process.env.PORT || 8500;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}/`);
+    console.log(`Server running on http://localhost:${PORT}/`);
 });
