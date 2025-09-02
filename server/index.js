@@ -40,6 +40,8 @@ app.post("/send-email", async (req, res) => {
     }
 });
 
+app.get("/api/health", (req, res) => res.send("Server running ✅"));
+
 // Catch-all route
 app.use("*", (req, res) => {
     res.status(404).json({ error: "Route not found" });
