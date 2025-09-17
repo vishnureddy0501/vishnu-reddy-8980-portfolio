@@ -10,7 +10,7 @@ export const experiences = [
         duration: "Oct 2023 – Present",
         location: "Remote",
         icon: BsLightningCharge,
-        tech: "Vue JS, Vuex, SCSS, React Native, AG-Grid",
+        tech: "Vue JS, Vuex, SCSS, Express.js, MongoDB, React JS, Next JS, AG-Grid",
         points: [
             "Implemented software development best practices to ensure optimal performance.",
             "Optimized frontend with code splitting, lazy loading, and caching for speed and scalability.",

@@ -15,19 +15,19 @@ export default [
         },
         rules: {
             // ESLint recommended
-            "no-unused-vars": "warn",
-            "no-console": "off",
+            // "no-unused-vars": "warn",
+            // "no-console": "off",
 
             // Prettier integration
-            "prettier/prettier": [
-                "error",
-                {
-                    tabWidth: 4, // ✅ 4 spaces
-                    useTabs: false,
-                    semi: true,
-                    singleQuote: false,
-                },
-            ],
+            // "prettier/prettier": [
+            //     "error",
+            //     {
+            //         tabWidth: 4, // ✅ 4 spaces
+            //         useTabs: false,
+            //         semi: true,
+            //         singleQuote: false,
+            //     },
+            // ],
         },
     },
 ];

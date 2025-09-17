@@ -4,6 +4,7 @@ import Experience from "./components/homepage/experience";
 import AboutPage from "./components/homepage/about";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
+import ChatPage from "./components/Chatbot";
 
 export default async function Home() {
 
@@ -15,6 +16,7 @@ export default async function Home() {
       <Projects />
       <Education />
       <ContactSection />
+      <ChatPage />
     </div>
   )
 };

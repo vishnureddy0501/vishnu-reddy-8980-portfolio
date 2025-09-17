@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import sendMail from "./SendEmail.js";
+import fetch from "node-fetch";
+import { handleChat } from "./chatHandler.js";
 
 dotenv.config();
 
@@ -12,12 +14,23 @@ const app = express();
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.NODE_ENV === "development" ? process.env.FRONTEND_DEV_URL : process.env.FRONTEND_PROD_URL,
+        methods: ["GET", "POST", "PUT", "DELETE"]
+    })
+);
 app.use(cookieParser());
 
 // Health check route
 app.get("/", (req, res) => {
     res.status(200).send({ message: "Server is running 🚀" });
+});
+
+app.get("/google-proxy", async (req, res) => {
+    const response = await fetch("https://scholar.google.com/");
+    const html = await response.text();
+    res.send(html);
 });
 
 // Email route
@@ -41,6 +54,8 @@ app.post("/send-email", async (req, res) => {
 });
 
 app.get("/api/health", (req, res) => res.send("Server running ✅"));
+
+app.post("/api/chat", handleChat);
 
 // Catch-all route
 app.use("*", (req, res) => {
