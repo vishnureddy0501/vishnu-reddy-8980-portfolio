@@ -55,7 +55,7 @@ app.post("/send-email", async (req, res) => {
 
 app.get("/api/health", (req, res) => res.send("Server running ✅"));
 
-app.post("/api/chat", handleChat);
+app.post("/chat", handleChat);
 
 // Catch-all route
 app.use("*", (req, res) => {
