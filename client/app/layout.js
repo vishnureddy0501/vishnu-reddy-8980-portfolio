@@ -1,9 +1,7 @@
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
-import { Inter } from "next/font/google";
 import "./css/globals.scss";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Portfolio of Vishnu Vardhan Reddy G - Software Developer",
@@ -14,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <div className="sticky top-0 z-[9999] backdrop-blur-md bg-[#0d1224]/80 border-b border-[#1a1f3a]">
           <Navbar />
         </div>
