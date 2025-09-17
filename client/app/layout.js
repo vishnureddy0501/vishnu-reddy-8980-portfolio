@@ -1,5 +1,3 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
@@ -17,7 +15,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastContainer />
         <div className="sticky top-0 z-[9999] backdrop-blur-md bg-[#0d1224]/80 border-b border-[#1a1f3a]">
           <Navbar />
         </div>
