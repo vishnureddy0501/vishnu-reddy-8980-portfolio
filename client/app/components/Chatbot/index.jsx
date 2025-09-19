@@ -5,9 +5,10 @@ import GlowCard from "../helper/glow-card";
 import { useChatSession } from "../../contexts/chatContext";
 import MessageList from "./MessageList";
 import InputBox from "./InputBox";
+import { sendChatMessage, closeChatSession } from "@/utils/api/chatApi";
 
 export default function ChatWidget() {
-  const { sessionId } = useChatSession();
+  const { session_id } = useChatSession();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." },
@@ -20,11 +21,34 @@ export default function ChatWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
-  const toggleChat = () => setOpen(!open);
+  const resetChatState = () => {
+    setMessages([{ role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." }]);
+    setInput("");
+    setLoading(false);
+  };
+
+  // Close session when popup closes
+  const toggleChat = async () => {
+    if (open && session_id) {
+      await closeChatSession(session_id);
+      resetChatState(); // reset after closing
+    }
+    setOpen(!open);
+  };
+
+  // Close session when component unmounts
+  useEffect(() => {
+    return () => {
+      if (session_id) {
+        closeChatSession(session_id);
+        resetChatState();
+      }
+    };
+  }, [session_id]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!input.trim() || !sessionId) return;
+    if (!input.trim() || !session_id) return;
 
     const userMsg = { role: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
@@ -32,20 +56,13 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const payload = { message: input, sessionId };
-      const url = process.env.NODE_ENV == 'development' ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
-      const response = await fetch(`${url}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error("Network response was not ok");
+      const responseBody = await sendChatMessage(session_id, input);
+      if (!responseBody) return;
 
       let assistantText = "";
       setMessages((prev) => [...prev, { role: "assistant", text: "" }]);
 
-      const reader = response.body.getReader();
+      const reader = responseBody.getReader();
       const decoder = new TextDecoder("utf-8");
 
       while (true) {
@@ -60,12 +77,15 @@ export default function ChatWidget() {
           if (data === "[DONE]") break;
 
           try {
-            const token = JSON.parse(data); // backend sends stringified chunks
+            const token = JSON.parse(data);
             assistantText += token;
 
             setMessages((prev) => {
               const updated = [...prev];
-              updated[updated.length - 1] = { role: "assistant", text: assistantText };
+              updated[updated.length - 1] = {
+                role: "assistant",
+                text: assistantText,
+              };
               return updated;
             });
           } catch (err) {
@@ -75,7 +95,10 @@ export default function ChatWidget() {
       }
     } catch (error) {
       console.error("Streaming error:", error);
-      setMessages((prev) => [...prev, { role: "assistant", text: "Error contacting server." }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", text: "Error contacting server." },
+      ]);
     } finally {
       setLoading(false);
     }
