@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const ChatContext = createContext();
 
 export function ChatProvider({ children }) {
-  const [sessionId, setSessionId] = useState(null);
+  const [session_id, setSessionId] = useState(null);
 
   useEffect(() => {
     const initSession = async () => {
@@ -21,11 +21,11 @@ export function ChatProvider({ children }) {
       }
     };
 
-    if (!sessionId) initSession();
-  }, [sessionId]);
+    if (!session_id) initSession();
+  }, [session_id]);
 
   return (
-    <ChatContext.Provider value={{ sessionId, setSessionId }}>
+    <ChatContext.Provider value={{ session_id, setSessionId }}>
       {children}
     </ChatContext.Provider>
   );
