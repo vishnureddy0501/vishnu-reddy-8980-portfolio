@@ -20,13 +20,12 @@ export const projectsData = [
         description: [
             "Developed a personal portfolio website with Next.js for fast rendering.",
             "Created a contact form with Nodemailer for sending emails directly from the site.",
-            "Integrated backend with Express.js to handle form submissions securely.",
-            "Deployed site with a focus on SEO and performance optimization.",
+            "Integrated backend with Express.js to handle form submissions securely."
         ],
-        tools: ["Next.js", "Express.js", "Nodemailer"],
+        tools: ["Next.js", "Express.js", "Tailwind", "Generative AI"],
         role: "Full Stack Developer",
-        code: "#",
-        demo: "#",
+        code: "https://github.com/vishnureddy0501/vishnu-reddy-8980-portfolio",
+        demo: "https://vishnu-vardhan-reddy-8980-portfolio.onrender.com",
     },
     {
         id: 3,
