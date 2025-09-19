@@ -9,7 +9,8 @@ export function ChatProvider({ children }) {
   useEffect(() => {
     const initSession = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat/start`, {
+        const url = process.env.NODE_ENV == 'development' ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+        const res = await fetch(`${url}/chat/start`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
         });
