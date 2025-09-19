@@ -1,12 +1,13 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { FiX } from "react-icons/fi";
 import GlowCard from "../helper/glow-card";
-import { FiSend, FiX } from "react-icons/fi";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
-import axios from "axios";
+import { useChatSession } from "../../contexts/chatContext";
+import MessageList from "./MessageList";
+import InputBox from "./InputBox";
 
 export default function ChatWidget() {
+  const { sessionId } = useChatSession();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." },
@@ -21,13 +22,9 @@ export default function ChatWidget() {
 
   const toggleChat = () => setOpen(!open);
 
-  const displayMarked = (data) => {
-   return DOMPurify.sanitize(marked.parse(data));
-  }
-
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || !sessionId) return;
 
     const userMsg = { role: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
@@ -35,13 +32,48 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`, {
-        message: input,
-        history: messages.map((m) => ({ role: m.role, content: m.text })), // full history
+      const payload = { message: input, sessionId };
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-    
-      setMessages((prev) => [...prev, { role: "assistant", text: data.reply }]);
-    } catch {
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      let assistantText = "";
+      setMessages((prev) => [...prev, { role: "assistant", text: "" }]);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split("\n").filter((l) => l.startsWith("data: "));
+
+        for (const line of lines) {
+          const data = line.replace("data: ", "").trim();
+          if (data === "[DONE]") break;
+
+          try {
+            const token = JSON.parse(data); // backend sends stringified chunks
+            assistantText += token;
+
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[updated.length - 1] = { role: "assistant", text: assistantText };
+              return updated;
+            });
+          } catch (err) {
+            console.error("JSON parse error", err, data);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Streaming error:", error);
       setMessages((prev) => [...prev, { role: "assistant", text: "Error contacting server." }]);
     } finally {
       setLoading(false);
@@ -74,45 +106,11 @@ export default function ChatWidget() {
               </div>
 
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 scrollbar-thin scrollbar-thumb-violet-500 scrollbar-track-[#1a1443]">
-                {messages.map((msg, idx) => (
-                    <div
-                    key={idx}
-                    className={`p-2 rounded-xl max-w-[85%] break-words ${msg.role === "user"
-                      ? "self-end bg-gradient-to-br from-[#8433ff] via-[#8f43ff] to-[#16f2b3] text-white"
-                      : "self-start bg-[#25213b] text-gray-300"
-                      }`}
-                      dangerouslySetInnerHTML={{ __html: displayMarked(msg.text) }}
-                  />
-                ))}
+              <MessageList messages={messages} loading={loading} />
+              <div ref={messagesEndRef} />
 
-                {loading && (
-                  <div className="flex gap-2 items-center self-start mt-1">
-                    <span className="w-2 h-2 bg-[#8f43ff] rounded-full animate-bounce"></span>
-                    <span className="w-2 h-2 bg-[#16f2b3] rounded-full animate-bounce delay-200"></span>
-                    <span className="w-2 h-2 bg-[#8433ff] rounded-full animate-bounce delay-400"></span>
-                  </div>
-                )}
-
-                <div ref={messagesEndRef} />
-              </div>
-
-              <form onSubmit={sendMessage} className="flex gap-2 p-3 border-t border-[#25213b]">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
-                  className="flex-1 bg-[#1a1443] border border-[#25213b] rounded-xl px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="bg-gradient-to-br from-[#8433ff] via-[#8f43ff] to-[#16f2b3] p-2 rounded-xl flex items-center justify-center hover:scale-105 transition-transform disabled:opacity-50"
-                >
-                  <FiSend className="text-white" size={18} />
-                </button>
-              </form>
+              {/* Input */}
+              <InputBox input={input} setInput={setInput} onSend={sendMessage} loading={loading} />
             </div>
           </GlowCard>
         </div>

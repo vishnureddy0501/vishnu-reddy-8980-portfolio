@@ -4,8 +4,9 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import sendMail from "./SendEmail.js";
-import fetch from "node-fetch";
-import { handleChat } from "./chatHandler.js";
+import chatRoutes from "./routes/chat.js";
+import { connectMongo } from "./db/mongo.js";
+import { createRedisClient } from "./db/redis.js";
 
 dotenv.config();
 
@@ -27,11 +28,6 @@ app.get("/", (req, res) => {
     res.status(200).send({ message: "Server is running 🚀" });
 });
 
-app.get("/google-proxy", async (req, res) => {
-    const response = await fetch("https://scholar.google.com/");
-    const html = await response.text();
-    res.send(html);
-});
 
 // Email route
 app.post("/send-email", async (req, res) => {
@@ -53,17 +49,28 @@ app.post("/send-email", async (req, res) => {
     }
 });
 
-app.get("/api/health", (req, res) => res.send("Server running ✅"));
+// Routes
+app.use("/chat", chatRoutes);
 
-app.post("/chat", handleChat);
+// Health
+app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
 // Catch-all route
 app.use("*", (req, res) => {
     res.status(404).json({ error: "Route not found" });
 });
 
-// Start server
 const PORT = process.env.PORT || 8500;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}/`);
-});
+
+(async function start() {
+  try {
+    await connectMongo();
+    await createRedisClient();
+    app.listen(PORT, () => {
+      console.log(`Server listening on ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to start server", err);
+    process.exit(1);
+  }
+})();
