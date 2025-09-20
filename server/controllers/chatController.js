@@ -4,6 +4,7 @@ import { saveMessage, fetchMessagesBySession } from "../services/messageService.
 import { getCachedHistory, cacheHistoryAppend, cacheSessionMeta } from "../db/redisService.js";
 import { streamCompletion } from "../services/openrouterService.js";
 import profileData from "../profileContext.js"
+import { acquireLock, releaseLock } from "../services/lockManager.js";
 
 const SYSTEM_PROMPT_TEMPLATE = (profileContext) => `
 You are a helpful assistant with access ONLY to the provided PROFILE_CONTEXT (below).
@@ -43,13 +44,17 @@ export async function handleChatStart(req, res) {
  * Expected body: { session_id, message }
  */
 export async function handleChatStream(req, res) {
+  const { session_id, message } = req.body;
   try {
-    const { session_id: providedSessionId, message } = req.body;
+    console.log(message, session_id);
     const profileContext = JSON.stringify(profileData);
+    if (!session_id) return res.status(400).json({ error: "Missing Session Id" });
     if (!message) return res.status(400).json({ error: "Missing message" });
 
-    // get or create session_id
-    const session_id = providedSessionId || uuidv4();
+    const lock = await acquireLock(session_id);
+    if (!lock.acquired) {
+      return res.status(429).json({ error: "Another request is in progress." });
+    }
 
     // fetch history (try redis first, fallback to mongo)
     let history = await getCachedHistory(session_id);
@@ -100,6 +105,7 @@ export async function handleChatStream(req, res) {
       // send end event
       res.write(`event: end\ndata: [DONE]\n\n`);
       // persist assistant message to DB and cache
+      console.log(assistantBuffer,session_id, "writing to messages collection");
       const assistantMsg = {
         session_id,
         role: "assistant",
@@ -139,6 +145,8 @@ export async function handleChatStream(req, res) {
     } catch (e) {
       console.error("failed to respond after error", e);
     }
+  } finally {
+    await releaseLock(session_id);
   }
 }
 
