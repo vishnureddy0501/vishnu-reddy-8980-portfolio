@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 import GlowCard from "../helper/glow-card";
 import { useChatSession } from "../../contexts/chatContext";
@@ -15,11 +15,7 @@ export default function ChatWidget() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, open]);
 
   const resetChatState = () => {
     setMessages([{ role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." }]);
@@ -74,7 +70,11 @@ export default function ChatWidget() {
 
         for (const line of lines) {
           const data = line.replace("data: ", "").trim();
-          if (data === "[DONE]") break;
+          if (data === "[DONE]") {
+            // ✅ Stream complete → hide loader immediately
+            setLoading(false);
+            break;
+          }
 
           try {
             const token = JSON.parse(data);
@@ -116,9 +116,9 @@ export default function ChatWidget() {
 
       {/* Chat Popup */}
       {open && (
-        <div className="fixed bottom-20 right-6 w-80 sm:w-96 z-50">
+        <div className="fixed top-0 left-0 sm:bottom-20 sm:right-6 sm:top-[unset] sm:left-[unset] z-[9999]">
           <GlowCard className="flex flex-col h-full shadow-2xl bg-[#1a1443] border border-[#25213b] rounded-2xl overflow-hidden">
-            <div className="h-[500px] flex flex-col">
+            <div className="h-screen sm:h-[500px] w-[98vw] sm:w-96 flex flex-col">
               {/* Header */}
               <div className="flex justify-between items-center p-3 border-b border-[#25213b]">
                 <h3 className="text-white font-semibold text-sm sm:text-base">
@@ -131,7 +131,6 @@ export default function ChatWidget() {
 
               {/* Messages */}
               <MessageList messages={messages} loading={loading} />
-              <div ref={messagesEndRef} />
 
               {/* Input */}
               <InputBox input={input} setInput={setInput} onSend={sendMessage} loading={loading} />
