@@ -29,6 +29,7 @@ export default function MessageList({ messages, loading }) {
           <span className="w-2 h-2 bg-[#8f43ff] rounded-full animate-bounce"></span>
           <span className="w-2 h-2 bg-[#16f2b3] rounded-full animate-bounce delay-200"></span>
           <span className="w-2 h-2 bg-[#8433ff] rounded-full animate-bounce delay-400"></span>
+          <span className="ml-3 text-gray-300">Processing your request...</span>
         </div>
       )}
       <div ref={messagesEndRef} />
