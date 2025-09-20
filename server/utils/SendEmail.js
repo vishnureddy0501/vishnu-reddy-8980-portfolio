@@ -19,8 +19,6 @@ export default function sendMail(receiverEmail, text, subject) {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error("Error sending email:", error);
-        } else {
-            console.log("Email sent successfully:", info.response);
         }
     });
 }

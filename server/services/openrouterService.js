@@ -31,32 +31,26 @@ export async function streamCompletion({ messages, onDelta, onDone, onError }) {
     }
 
     let buffer = "";
-    console.log("[streamCompletion] ✅ Streaming started...");
     for await (const chunk of resp.body) {
       const str = chunk.toString();
-      console.log("[Raw Chunk]", str); // log raw SSE chunk
       buffer += str;
 
       const events = buffer.split("\n\n");
       buffer = events.pop(); // keep partial if not complete
       for (const ev of events) {
         if (!ev.trim()) continue;
-        console.log("[SSE Event]", ev);
         if (ev.startsWith("data: ")) {
           const dataStr = ev.replace("data: ", "").trim();
 
           if (dataStr === "[DONE]") {
-            console.log("[DONE] ✅ Stream complete");
             await onDone();
             return;
           }
 
           try {
             const parsed = JSON.parse(dataStr);
-            console.log("[Parsed JSON]", parsed);
             const delta = parsed?.choices?.[0]?.delta?.content;
             if (delta) {
-              console.log("[Delta]", delta);
               await onDelta(delta);
             }
           } catch (err) {
@@ -67,7 +61,6 @@ export async function streamCompletion({ messages, onDelta, onDone, onError }) {
       }
     }
     // if loop exits without [DONE]
-    console.log("[streamCompletion] ⚠️ Stream ended without [DONE]");
     await onDone();
   } catch (err) {
     console.error("[streamCompletion] ❌ Error:", err);

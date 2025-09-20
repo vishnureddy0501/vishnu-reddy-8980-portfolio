@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiX } from "react-icons/fi";
 import GlowCard from "../helper/glow-card";
 import { useChatSession } from "../../contexts/chatContext";
@@ -10,12 +10,13 @@ import { sendChatMessage, closeChatSession } from "@/utils/api/chatApi";
 export default function ChatWidget() {
   const { session_id } = useChatSession();
   const [open, setOpen] = useState(false);
+  const [isStreaming, setIsStreaming] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const messagesEndRef = useRef(null);
 
   const resetChatState = () => {
     setMessages([{ role: "assistant", text: "Hi! Ask me anything about Vishnu's profile." }]);
@@ -23,16 +24,14 @@ export default function ChatWidget() {
     setLoading(false);
   };
 
-  // Close session when popup closes
   const toggleChat = async () => {
     if (open && session_id) {
       await closeChatSession(session_id);
-      resetChatState(); // reset after closing
+      resetChatState();
     }
     setOpen(!open);
   };
 
-  // Close session when component unmounts
   useEffect(() => {
     return () => {
       if (session_id) {
@@ -45,6 +44,8 @@ export default function ChatWidget() {
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!input.trim() || !session_id) return;
+    if (isStreaming) return; // 🚫 block 2nd query
+    setIsStreaming(true);
 
     const userMsg = { role: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
@@ -71,7 +72,6 @@ export default function ChatWidget() {
         for (const line of lines) {
           const data = line.replace("data: ", "").trim();
           if (data === "[DONE]") {
-            // ✅ Stream complete → hide loader immediately
             setLoading(false);
             break;
           }
@@ -82,10 +82,7 @@ export default function ChatWidget() {
 
             setMessages((prev) => {
               const updated = [...prev];
-              updated[updated.length - 1] = {
-                role: "assistant",
-                text: assistantText,
-              };
+              updated[updated.length - 1] = { role: "assistant", text: assistantText };
               return updated;
             });
           } catch (err) {
@@ -95,12 +92,10 @@ export default function ChatWidget() {
       }
     } catch (error) {
       console.error("Streaming error:", error);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", text: "Error contacting server." },
-      ]);
+      setMessages((prev) => [...prev, { role: "assistant", text: "Error contacting server." }]);
     } finally {
       setLoading(false);
+      setIsStreaming(false);
     }
   };
 
@@ -116,10 +111,10 @@ export default function ChatWidget() {
 
       {/* Chat Popup */}
       {open && (
-        <div className="fixed top-0 left-0 sm:bottom-20 sm:right-6 sm:top-[unset] sm:left-[unset] z-[9999]">
-          <GlowCard className="flex flex-col h-full shadow-2xl bg-[#1a1443] border border-[#25213b] rounded-2xl overflow-hidden">
-            <div className="h-screen sm:h-[500px] w-[98vw] sm:w-96 flex flex-col">
-              {/* Header */}
+        <div className="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-6 sm:w-96 sm:h-[500px] z-[9999]">
+          <GlowCard identifier={'chat-bot-glow-card'} height={'h-[100%]'} className="flex flex-col h-[100dvh] sm:h-full w-full sm:w-full shadow-2xl bg-[#1a1443] border border-[#25213b] rounded-none sm:rounded-2xl">
+            {/* Header */}
+            <div className="flex flex-col h-[100%]">
               <div className="flex justify-between items-center p-3 border-b border-[#25213b]">
                 <h3 className="text-white font-semibold text-sm sm:text-base">
                   Vishnu's Profile Chat
@@ -129,11 +124,16 @@ export default function ChatWidget() {
                 </button>
               </div>
 
-              {/* Messages */}
-              <MessageList messages={messages} loading={loading} />
+              {/* Messages (scrollable) */}
+              <div className="flex-1 overflow-y-auto px-3 py-2">
+                <MessageList messages={messages} loading={loading} />
+                <div ref={messagesEndRef} />
+              </div>
 
-              {/* Input */}
-              <InputBox input={input} setInput={setInput} onSend={sendMessage} loading={loading} />
+              {/* Input (sticky bottom) */}
+              <div className="border-t border-[#25213b] bg-[#1a1443] p-2">
+                <InputBox input={input} setInput={setInput} onSend={sendMessage} loading={loading} isStreaming={isStreaming}/>
+              </div>
             </div>
           </GlowCard>
         </div>

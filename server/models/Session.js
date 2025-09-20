@@ -7,6 +7,8 @@ const SessionSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   meta: { type: mongoose.Schema.Types.Mixed },
+  lock: { type: Boolean, default: false },
+  lockExpireAt: { type: Date },
 });
 
 SessionSchema.pre("save", function (next) {
