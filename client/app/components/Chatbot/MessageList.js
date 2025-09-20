@@ -1,7 +1,13 @@
+"use client";
 import { marked } from "marked";
+import { useEffect, useRef } from "react";
 import DOMPurify from "dompurify";
 
 export default function MessageList({ messages, loading }) {
+  const messagesEndRef = useRef(null);
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
   const displayMarked = (text) => DOMPurify.sanitize(marked.parse(text));
 
   return (
@@ -25,6 +31,7 @@ export default function MessageList({ messages, loading }) {
           <span className="w-2 h-2 bg-[#8433ff] rounded-full animate-bounce delay-400"></span>
         </div>
       )}
+      <div ref={messagesEndRef} />
     </div>
   );
 }
