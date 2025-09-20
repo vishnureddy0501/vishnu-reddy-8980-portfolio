@@ -70,7 +70,11 @@ export default function ChatWidget() {
 
         for (const line of lines) {
           const data = line.replace("data: ", "").trim();
-          if (data === "[DONE]") break;
+          if (data === "[DONE]") {
+            // ✅ Stream complete → hide loader immediately
+            setLoading(false);
+            break;
+          }
 
           try {
             const token = JSON.parse(data);
