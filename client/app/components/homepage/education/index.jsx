@@ -32,7 +32,7 @@ function Education() {
       </div>
 
       {/* Education Cards */}
-      <div className="flex flex-col items-center gap-12 py-10">
+      <div className="flex flex-col items-center gap-12 pt-10">
         <div className="w-full max-w-5xl flex flex-col gap-8">
           {educations.map((education) => {
             const Icon = education.icon;

@@ -11,7 +11,7 @@ const Skills = () => {
       </div>
       
       {/* Section Heading */}
-      <div className="flex justify-center p-10">
+      <div className="flex justify-center py-10">
         <div className="relative inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#1a1443] text-white text-2xl font-semibold tracking-wide shadow-[0_0_20px_rgba(112,89,255,0.4)] ring-1 ring-violet-600/50 backdrop-blur-md">
           <FaLightbulb className="text-[#16f2b3] w-6 h-6 drop-shadow-[0_0_10px_#16f2b3]" />
           <span className="bg-gradient-to-r from-[#8f43ff] via-[#8433ff] to-[#16f2b3] bg-clip-text text-transparent">

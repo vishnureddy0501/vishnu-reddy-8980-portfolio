@@ -30,7 +30,7 @@ function Experience() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center gap-12 py-10">
+      <div className="flex flex-col items-center gap-12 pt-10">
         <div className="w-full max-w-5xl flex flex-col gap-8">
           {experiences.map((exp) => {
             const Icon = exp.icon;
