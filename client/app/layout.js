@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           <div className="sticky top-0 z-[9999] backdrop-blur-md bg-[#0d1224]/80 border-b border-[#1a1f3a]">
             <Navbar />
           </div>
-          <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[80rem] xl:max-w-[76rem] 2xl:max-w-[92rem] text-white">
+          <main className="min-h-[100dvh] flex flex-col relative mx-auto px-6 sm:px-12 lg:max-w-[80rem] xl:max-w-[76rem] 2xl:max-w-[92rem] text-white">
             {children}
           </main>
           <Footer />
