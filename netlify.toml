@@ -1,6 +1,6 @@
 [build]
   base = "client"
-  command = "npm run build"
+  command = "npm install next@latest --legacy-peer-deps && npm run build"
   publish = ".next"
 
 [build.environment]
