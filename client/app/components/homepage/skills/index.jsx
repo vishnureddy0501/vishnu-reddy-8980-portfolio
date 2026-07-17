@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaLightbulb } from 'react-icons/fa';
 import skillsData from "@/utils/data/skills-data.js"
 const Skills = () => {
@@ -30,7 +29,13 @@ const Skills = () => {
                 key={skill.name}
                 className="flex items-center bg-white text-black px-4 py-2 rounded-xl shadow-[6px_6px_0px_#555] hover:scale-105 transition-transform"
               >
-                <img src={skill.icon} alt={skill.name} className="w-6 h-6 mr-2" />
+                <img
+                  src={skill.icon}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="w-6 h-6 mr-2 object-contain"
+                />
                 <span className="font-medium">{skill.name}</span>
               </div>
             ))}

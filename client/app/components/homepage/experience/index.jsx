@@ -61,19 +61,19 @@ function Experience() {
                         <div className="text-sm text-[#16f2b3] whitespace-nowrap">{exp.duration}</div>
                       </div>
 
-                      <ul className="list-disc list-inside text-sm text-gray-300 space-y-1 pt-2">
-                        {exp.points.map((point, idx) => (
-                          <li key={idx}>{point}</li>
+                      <ul className="ml-5 list-disc space-y-2 pt-2 text-sm leading-relaxed text-gray-300 marker:text-[#16f2b3]">
+                        {exp.points.map((point) => (
+                          <li key={point} className="pl-1">{point}</li>
                         ))}
                       </ul>
 
                       <div className="flex flex-wrap gap-2 pt-3">
-                        {exp.tech?.split(",").map((tech, idx) => (
+                        {exp.tech?.map((tech) => (
                           <span
-                            key={idx}
+                            key={tech}
                             className="px-3 py-1 text-xs font-semibold text-white bg-violet-600/20 border border-violet-500 rounded-full shadow-md backdrop-blur-sm"
                           >
-                            {tech.trim()}
+                            {tech}
                           </span>
                         ))}
                       </div>

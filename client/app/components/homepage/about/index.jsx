@@ -17,6 +17,7 @@ function HeroAboutSection() {
             alt="Section Background"
             width={1572}
             height={795}
+            priority
             className="absolute top-0 -z-10"
           />
           {/* Wrapper */}
@@ -45,18 +46,14 @@ function HeroAboutSection() {
 
                 {/* Buttons */}
                 <div className="flex flex-wrap gap-4">
-                  <Link href="#contact" className="group">
-                    <button className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold uppercase rounded-full bg-gradient-to-r from-violet-600 to-pink-500 text-white shadow hover:from-pink-500 hover:to-violet-600 transition-all duration-300">
+                  <Link href="#contact" className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-pink-500 px-5 py-2.5 text-sm font-semibold uppercase text-white shadow transition-all duration-300 hover:from-pink-500 hover:to-violet-600">
                       Contact Me
                       <RiContactsFill size={18} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
                   </Link>
 
-                  <Link href={personalData.resume} target="_blank" className="group">
-                    <button className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold uppercase rounded-full border border-[#16f2b3] text-[#16f2b3] hover:bg-[#16f2b3] hover:text-[#0d1224] transition-all duration-300">
+                  <Link href={personalData.resume} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 rounded-full border border-[#16f2b3] px-5 py-2.5 text-sm font-semibold uppercase text-[#16f2b3] transition-all duration-300 hover:bg-[#16f2b3] hover:text-[#0d1224]">
                       Get Resume
                       <MdDownload size={18} className="group-hover:-translate-y-0.5 transition-transform" />
-                    </button>
                   </Link>
                 </div>
               </div>
@@ -69,6 +66,7 @@ function HeroAboutSection() {
                       src={personalData.profile}
                       alt={personalData.name}
                       fill
+                      sizes="(min-width: 1280px) 256px, (min-width: 1024px) 224px, (min-width: 640px) 192px, 160px"
                       className="object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700"
                     />
                   </div>

@@ -23,7 +23,7 @@ function Footer() {
               href={personalData.linkedIn}
               className="text-[#16f2b3] hover:underline"
             >
-              Vishnu Vardhan Reddy G
+              {personalData.name}
             </Link>
           </p>
 

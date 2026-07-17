@@ -30,10 +30,10 @@ const Projects = () => {
 
       {/* Grid Project Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {projectsData.slice(0, 4).map((project, index) => (
+        {projectsData.map((project) => (
           <div
-            key={index}
-            className="rounded-xl shadow-lg bg-white/10 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            key={project.id}
+            className="h-full rounded-xl bg-white/10 shadow-lg backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
           >
             <ProjectCard project={project} />
           </div>

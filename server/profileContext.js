@@ -1,164 +1,99 @@
 const data = {
-  "personal": {
-    "name": "Vishnu Vardhan Reddy G",
-    "profile": "/Vishnu.jpg",
-    "designation": "Full Stack Developer & AI Enthusiast",
-    "description": "I create modern and responsive web applications that provide seamless user experiences. My expertise lies in both front-end and back-end development, ensuring a holistic approach to building robust digital solutions.",
-    "email": "vishnureddy8980@gmail.com",
-    "phone": "+91 9121808980",
-    "address": "Ongole, Andhra Pradesh, India",
-    "github": "https://github.com/vishnureddy0501/",
-    "linkedIn": "https://www.linkedin.com/in/vishnu-vardhan-reddy-7061a71b5/",
-    "leetcode": "https://leetcode.com/u/vishnureddy8980/",
-    "resume": "https://drive.google.com/file/d/1oQIgvJzXzszKP-RNqyQ3_oYt31bd-ZVo/view?usp=sharing"
+  personal: {
+    name: "Vishnu Vardhan Reddy Gujjula",
+    designation: "Full Stack Software Engineer",
+    description:
+      "Full Stack Software Engineer with 3+ years of experience building scalable web applications, high-performance frontend and backend systems, and distributed architectures.",
+    email: "vishnureddy8980@gmail.com",
+    phone: "+91 9121808980",
+    address: "Ongole, Andhra Pradesh, India",
+    github: "https://github.com/vishnureddy0501/",
+    linkedIn: "https://www.linkedin.com/in/vishnu-vardhan-reddy-gujjula/",
+    leetcode: "https://leetcode.com/u/vishnureddy8980/",
+    resume: "https://drive.google.com/file/d/1oQIgvJzXzszKP-RNqyQ3_oYt31bd-ZVo/view?usp=sharing",
   },
-  "education": [
+  experience: [
     {
-      "id": 1,
-      "title": "B.Tech (Computer Science)",
-      "institution": "Jawaharlal Nehru Technological University",
-      "duration": "2019-2023",
-      "grade": "CGPA: 8.5",
-      "description": "Completed Graduation in Computer Science, gaining in-depth knowledge in programming, algorithms, and software engineering. Applied academic learning to real-world scenarios through projects and collaborative work.",
-      "completed": true
+      title: "Software Engineer",
+      company: "Aviso AI",
+      duration: "Feb 2025 – Present",
+      technologies: ["Vue.js", "Vuex", "React.js", "Node.js", "Express.js", "REST APIs", "Microservices", "Microfrontends", "MongoDB", "Redis", "AG Grid", "D3.js", "Highcharts", "Chart.js", "Axios"],
+      highlights: [
+        "Delivered features across Customer Success Intelligence, Sales Engagement, Notification System, and Miki Chat.",
+        "Led four engineers, conducted code reviews, and mentored team members.",
+        "Built real-time KPI dashboards and improved application performance, reliability, and stability.",
+      ],
     },
     {
-      "id": 2,
-      "title": "Higher Secondary Certificate",
-      "institution": "Vignan Junior College",
-      "duration": "2017-2019",
-      "grade": "CGPA: 10.0",
-      "description": "Completed higher secondary education with a specialization in Biology and Mathematics, building the groundwork for advanced technical studies.",
-      "completed": true
+      title: "Associate Software Engineer",
+      company: "Aviso AI",
+      duration: "Oct 2023 – Feb 2025",
+      technologies: ["Vue.js", "Vuex", "React.js", "Node.js", "Express.js", "REST APIs", "Redis", "MongoDB", "Microservices", "Microfrontends", "AG Grid", "D3.js", "RxJS"],
+      highlights: [
+        "Enhanced Deals, Forecasts, Activity Intelligence, and Relationship Intelligence.",
+        "Built modular microfrontends and led the Vue 2 to Vue 3 migration.",
+        "Removed RxJS and refactored production code for maintainability.",
+      ],
     },
     {
-      "id": 3,
-      "title": "SSLC",
-      "institution": "Apex Techno School",
-      "duration": "2016 - 2017",
-      "grade": "CGPA: 10.0",
-      "description": "Successfully completed secondary education with a focus on core academic subjects, maintaining consistent performance and discipline.",
-      "completed": true
-    }
+      title: "Full Stack Developer Intern",
+      company: "Backflipt Software Limited",
+      duration: "Feb 2023 – May 2023",
+      technologies: ["React.js", "Next.js", "Node.js", "Express.js", "MongoDB", "Balkan.js", "shadcn/ui", "Tailwind CSS", "JWT", "Gmail OAuth"],
+      highlights: [
+        "Resolved production UI issues in a no-code app builder.",
+        "Built organizational visualizations and secure JWT and Gmail OAuth authentication.",
+      ],
+    },
+    {
+      title: "Software Developer Intern",
+      company: "Centre for Development of Advanced Computing (C-DAC)",
+      duration: "Jun 2022 – Sep 2022",
+      technologies: ["Vue.js", "Vuex", "JavaScript", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Graph Visualization", "Data Visualization"],
+      highlights: [
+        "Developed graph-based Teletraffic Engineering prototypes and interactive telecom-network simulations.",
+        "Built analytics charts for inspecting traffic patterns and network behavior.",
+        "Integrated Express.js APIs and MongoDB for network-data visualization workflows.",
+      ],
+    },
   ],
-  "contacts": {
-    "email": "vishnureddy8980@gmail.com",
-    "phone": "+91 9121808980",
-    "address": "Ongole, Andhra Pradesh, India",
-    "github": "https://github.com/vishnureddy0501/",
-    "linkedIn": "https://www.linkedin.com/in/vishnu-vardhan-reddy-7061a71b5/"
+  projects: [
+    {
+      name: "Sales Engagement Platform",
+      technologies: ["Vue.js", "Vuex", "JavaScript", "Node.js", "Express.js", "MongoDB", "REST APIs", "Quill.js", "Gmail API", "OAuth", "Responsive Design"],
+      result: "Improved user productivity by 30% and campaign response rates by 25%.",
+    },
+    {
+      name: "Customer Success Intelligence",
+      technologies: ["Vue.js", "Vuex", "JavaScript", "Node.js", "Express.js", "MongoDB", "REST APIs", "AG Grid", "Microfrontends", "RBAC", "Responsive Design", "Performance Optimization"],
+      result: "Unified customer health, account activity, ticket, meeting, usage, and engagement data.",
+    },
+    {
+      name: "Real-Time Chat Application",
+      technologies: ["React.js", "JavaScript", "Node.js", "Express.js", "MongoDB", "REST APIs", "WebSockets", "JWT", "RBAC", "Amazon S3", "Responsive Design"],
+      result: "Delivered secure low-latency messaging, presence, media sharing, and responsive UI.",
+    },
+  ],
+  education: {
+    degree: "Bachelor of Technology in Computer Science and Engineering",
+    institution: "University College of Engineering, JNTUK",
+    duration: "Aug 2019 – May 2023",
+    cgpa: "8.5",
+    highlights: ["Top four in the department", "Solved 1,000+ competitive-programming problems"],
   },
-  "experience": [
-    {
-      "id": 1,
-      "title": "Software Engineer",
-      "company": "Aviso AI",
-      "duration": "Oct 2023 – Present",
-      "location": "Remote",
-      "tech": ["Vue JS", "Vuex", "SCSS", "Express.js", "MongoDB", "React JS", "Next JS", "AG-Grid"],
-      "points": [
-        "Implemented software development best practices to ensure optimal performance.",
-        "Optimized frontend with code splitting, lazy loading, and caching for speed and scalability.",
-        "Integrated email connectivity with OAuth and developed a Gmail inbox module.",
-        "Created an email editor with Quill templates and integrated Calendly for scheduling.",
-        "Built a dialer feature using Twilio for seamless outbound calling.",
-        "Revamped themes and built advanced analytics with D3.js and Ag-Grid.",
-        "Addressed critical bugs and drove features under tight deadlines."
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Full Stack Developer Intern",
-      "company": "Backflipt Software Limited",
-      "duration": "Feb 2023 – May 2023",
-      "location": "Hyderabad, Telangana",
-      "tech": ["React", "Next.js", "Express JS", "MongoDB", "Shadcn/ui", "Tailwind"],
-      "points": [
-        "Resolved production UI issues for a no-code app builder.",
-        "Implemented organization charts with Balkan JS and influence graphs.",
-        "Built secure login system with encryption, JWT, Gmail OAuth, and email verification.",
-        "Led theme updates for better UI/UX."
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Software Developer Intern",
-      "company": "Centre for Development of Advanced Computing",
-      "duration": "June 2022 – Sep 2022",
-      "location": "Remote",
-      "tech": ["Vue JS", "Tailwind CSS", "Express JS", "MongoDB"],
-      "points": [
-        "Designed and developed graph-based prototypes for Teletraffic Engineering.",
-        "Built visual network simulations for telecom structures.",
-        "Implemented analytics charts for traffic pattern insights."
-      ]
-    }
+  achievements: [
+    "Solved 800+ LeetCode problems; global rank 55,772",
+    "AP EAMCET rank 430, among the top 1%",
+    "JEE Main rank 22,000, among the top 2%",
   ],
-  "projects": [
-    {
-      "id": 1,
-      "name": "Real-Time Chat Application",
-      "icon": "💬",
-      "role": "Full Stack Developer",
-      "description": [
-        "Built a real-time chat application using WebSockets for instant communication.",
-        "Developed backend with Express.js and MongoDB for message persistence.",
-        "Integrated authentication and user presence tracking."
-      ],
-      "tools": ["Next.js", "Express.js", "WebSockets", "MongoDB"],
-      "code": "#",
-      "demo": "#"
-    },
-    {
-      "id": 2,
-      "name": "Personal Portfolio Website",
-      "icon": "🌐",
-      "role": "Full Stack Developer",
-      "description": [
-        "Developed a personal portfolio website with Next.js for fast rendering.",
-        "Created a contact form with Nodemailer for sending emails directly from the site.",
-        "Integrated backend with Express.js to handle form submissions securely.",
-        "Deployed site with a focus on SEO and performance optimization."
-      ],
-      "tools": ["Next.js", "Express.js", "Nodemailer"],
-      "code": "#",
-      "demo": "#"
-    },
-    {
-      "id": 3,
-      "name": "Academic Section Automation",
-      "icon": "🎓",
-      "role": "Full Stack Developer",
-      "description": [
-        "Developed a web app to streamline student result and certificate notifications.",
-        "Integrated with LMS/University Database and sent personalized email updates.",
-        "Built a secure platform for students to access results, download certificates, and get notifications."
-      ],
-      "tools": ["Vue.js", "Vuex", "JavaScript", "CSS", "Express.js", "MongoDB"],
-      "code": "#",
-      "demo": "#"
-    },
-    {
-      "id": 4,
-      "name": "Placement Cell Automation",
-      "icon": "🏢",
-      "role": "Full Stack Developer",
-      "description": [
-        "Automated student registrations, job postings, and interview scheduling processes.",
-        "Improved efficiency in managing placement activities, reducing manual work for coordinators.",
-        "Developed a dashboard for placement cell to track applications and schedules easily."
-      ],
-      "tools": ["Vue.js", "Vuex", "JavaScript", "CSS", "Express.js", "MongoDB"],
-      "code": "#",
-      "demo": "#"
-    }
-  ],
-  "skills": {
-    "Programming Languages": ["Java", "JavaScript", "TypeScript", "Python", "C++", "C", "HTML", "CSS"],
-    "Libraries & Frameworks": ["React", "Next.js", "Tailwind", "Node.js", "Vue"],
-    "Tools & Platforms": ["VS Code", "Git", "GitHub", "Firebase", "Notion", "Jupyter"],
-    "Databases": ["MySQL", "MongoDB"]
-  }
-}
+  skills: {
+    languages: ["Python", "C++", "JavaScript", "TypeScript"],
+    frontend: ["React.js", "Next.js", "Vue.js", "Vuex", "Redux", "React Native", "Tailwind CSS"],
+    backend: ["Node.js", "Express.js", "REST APIs", "JWT", "OAuth"],
+    data: ["MongoDB", "Redis", "Amazon S3"],
+    architecture: ["Microservices", "Microfrontends", "Event-Driven Architecture", "Distributed Systems", "RBAC"],
+    tools: ["Git/GitHub", "Docker", "AG Grid", "D3.js", "WebSockets"],
+  },
+};
 
 export default JSON.stringify(data);

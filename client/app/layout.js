@@ -4,9 +4,9 @@ import "./css/card.scss";
 import "./css/globals.scss";
 
 export const metadata = {
-  title: "Portfolio of Vishnu Vardhan Reddy G - Software Developer",
+  title: "Vishnu Vardhan Reddy Gujjula | Full Stack Software Engineer",
   description:
-    "This is the portfolio of Vishnu Vardhan Reddy G. I am a full stack developer and a self taught developer. I love to learn new things and I am always open to collaborating with others. I am a quick learner and I am always looking for new challenges.",
+    "Portfolio of Vishnu Vardhan Reddy Gujjula, a Full Stack Software Engineer with 3+ years of experience building scalable frontend, backend, and distributed systems.",
 };
 import { ChatProvider } from "./contexts/chatContext";
 
@@ -27,4 +27,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

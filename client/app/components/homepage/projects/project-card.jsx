@@ -4,7 +4,7 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 function ProjectCard({ project }) {
   return (
-    <div className="group relative w-full rounded-xl border border-[#1b2c68a0] bg-gradient-to-br from-[#0d1224] to-[#0a0d37] shadow-lg overflow-hidden transition-all hover:scale-[1.02] hover:shadow-pink-500/30">
+    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#1b2c68a0] bg-gradient-to-br from-[#0d1224] to-[#0a0d37] shadow-lg transition-all hover:border-violet-500/50 hover:shadow-pink-500/20">
       {/* Top gradient border */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
 
@@ -22,19 +22,19 @@ function ProjectCard({ project }) {
       </div>
 
       {/* Description */}
-      <div className="px-5 pt-2 pb-3 pl-[3.75rem]">
-        <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
-          {project.description.map((point, index) => (
-            <li key={index}>{point}</li>
+      <div className="px-5 pb-4 pt-3 sm:pl-[3.75rem]">
+        <ul className="ml-5 list-disc space-y-2 text-sm leading-relaxed text-gray-300 marker:text-pink-400">
+          {project.description.map((point) => (
+            <li key={point} className="pl-1">{point}</li>
           ))}
         </ul>
       </div>
 
       {/* Tools */}
-      <div className="flex flex-wrap gap-2 px-5 pb-3 pl-[3.75rem]">
-        {project.tools.map((tool, index) => (
+      <div className="flex flex-wrap gap-2 px-5 pb-5 sm:pl-[3.75rem]">
+        {project.tools.map((tool) => (
           <span
-            key={index}
+            key={tool}
             className="text-xs font-medium text-[#16f2b3] border border-[#16f2b3] bg-[#16f2b315] px-2.5 py-1 rounded-full hover:bg-[#16f2b325] transition"
           >
             {tool}
@@ -43,7 +43,7 @@ function ProjectCard({ project }) {
       </div>
 
       {/* Links as Gradient Buttons */}
-      <div className="px-5 pb-5 flex items-center gap-4 pl-[3.75rem]">
+      {(project.code || project.demo) && <div className="mt-auto flex items-center gap-4 px-5 pb-5 pl-[3.75rem]">
         {project.code && (
           <a
             href={project.code}
@@ -68,11 +68,11 @@ function ProjectCard({ project }) {
             Demo
           </a>
         )}
-      </div>
+      </div>}
 
       {/* Bottom gradient border */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-violet-600 to-transparent" />
-    </div>
+    </article>
   );
 }
 

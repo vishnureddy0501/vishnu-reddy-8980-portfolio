@@ -149,6 +149,7 @@ Message: ${formData.message}
           </div>
 
           {/* Right Section - Form */}
+          {/*
           <form
             onSubmit={handleSubmit}
             className="flex-1 space-y-6 bg-gradient-to-br from-[#0f132c] to-[#0c1028] border border-[#281b89] rounded-xl p-6 shadow-lg"
@@ -197,6 +198,7 @@ Message: ${formData.message}
 
             <div className="h-1 w-full bg-gradient-to-r from-transparent via-violet-600 to-transparent rounded-b" />
           </form>
+          */}
         </div>
       </section>
     </GlowCard>

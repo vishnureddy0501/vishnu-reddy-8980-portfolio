@@ -1,34 +1,62 @@
-const skillsData =
-{
-	"Programming Languages": [
-		{ "name": "Java", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-		{ "name": "JavaScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-		{ "name": "TypeScript", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-		{ "name": "Python", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-		{ "name": "C++", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-		{ "name": "C", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
-		{ "name": "HTML", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-		{ "name": "CSS", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
-	],
-	"Libraries & Frameworks": [
-		{ "name": "React", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-		{ "name": "Next.js", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-		{ "name": "Tailwind", "icon": '/tailwind.svg' },
-		{ "name": "Node.js", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-		{ "name": "Vue", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" }
-	],
-	"Tools & Platforms": [
-		{ "name": "VS Code", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-		{ "name": "Git", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-		{ "name": "GitHub", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-		{ "name": "Firebase", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-		{ "name": "Notion", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" },
-		{ "name": "Jupyter", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" }
-	],
-	"Databases": [
-		{ "name": "MySQL", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-		{ "name": "MongoDB", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" }
-	]
+const icon = (slug, color) =>
+  `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
+
+const skillsData = {
+  "Programming Languages": [
+    { name: "Python", icon: icon("python") },
+    { name: "C++", icon: icon("cplusplus") },
+    { name: "JavaScript", icon: icon("javascript") },
+    { name: "TypeScript", icon: icon("typescript") },
+  ],
+  "Frontend Technologies": [
+    { name: "React.js", icon: icon("react") },
+    { name: "Next.js", icon: icon("nextdotjs") },
+    { name: "Vue.js", icon: icon("vuedotjs") },
+    { name: "Vuex", icon: icon("vuedotjs") },
+    { name: "Redux", icon: icon("redux") },
+    { name: "React Native", icon: icon("react") },
+    { name: "HTML5", icon: icon("html5") },
+    { name: "CSS3", icon: icon("css") },
+    { name: "Tailwind CSS", icon: icon("tailwindcss") },
+    { name: "shadcn/ui", icon: icon("shadcnui") },
+  ],
+  "Libraries, APIs & Services": [
+    { name: "AG Grid", icon: icon("aggrid") },
+    { name: "Quill.js", icon: icon("quill") },
+    { name: "Highcharts", icon: icon("highcharts") },
+    { name: "D3.js", icon: icon("d3") },
+    { name: "Chart.js", icon: icon("chartdotjs") },
+    { name: "Axios", icon: icon("axios") },
+    { name: "Amazon S3", icon: icon("amazons3") },
+    { name: "CDN", icon: icon("cloudflare") },
+    { name: "WebSockets", icon: icon("socketdotio") },
+  ],
+  "Backend & Data": [
+    { name: "Node.js", icon: icon("nodedotjs") },
+    { name: "Express.js", icon: icon("express") },
+    { name: "REST APIs", icon: icon("openapiinitiative") },
+    { name: "Authentication", icon: icon("auth0") },
+    { name: "JWT", icon: icon("jsonwebtokens") },
+    { name: "OAuth", icon: icon("auth0") },
+    { name: "MongoDB", icon: icon("mongodb") },
+    { name: "Redis", icon: icon("redis") },
+  ],
+  "Architecture & System Design": [
+    { name: "Microservices", icon: icon("kubernetes") },
+    { name: "Microfrontends", icon: icon("webpack") },
+    { name: "Event-Driven Architecture", icon: icon("apachekafka") },
+    { name: "Distributed Systems", icon: icon("apachekafka") },
+    { name: "System Design", icon: icon("diagramsdotnet") },
+    { name: "RBAC", icon: icon("auth0") },
+  ],
+  "Tools & Core Skills": [
+    { name: "Git/GitHub", icon: icon("github") },
+    { name: "Docker", icon: icon("docker") },
+    { name: "Data Structures", icon: icon("codecademy") },
+    { name: "Algorithms", icon: icon("leetcode") },
+    { name: "Problem Solving", icon: icon("leetcode") },
+    { name: "Performance Optimization", icon: icon("lighthouse") },
+  ],
 };
 
 export default skillsData;
